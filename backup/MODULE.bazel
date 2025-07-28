@@ -1,0 +1,32 @@
+bazel_dep(name = "rules_cuda", version = "0.2.5")
+
+# Required transitive dependencies
+bazel_dep(name = "rules_cc", version = "0.1.4")
+bazel_dep(name = "platforms", version = "1.0.0")
+
+bazel_dep(name = "abseil-cpp", version = "20250512.1")
+
+bazel_dep(name = "rules_proto", version = "7.1.0")
+proto_ext = use_extension("@rules_proto//proto:extensions.bzl", "proto_toolchain")
+# Then call use_repo on the bound variable
+use_repo(proto_ext, "proto")
+
+bazel_dep(name = "protobuf", version = "32.0-rc1")
+
+
+bazel_dep(name = "zlib", version = "1.3.1.bcr.6")
+bazel_dep(name = "googletest", version = "1.17.0")
+
+bazel_dep(name = "yggdrasil_decision_forests", version = "0.0.0")
+local_path_override(
+    module_name = "yggdrasil_decision_forests",
+    path = "yggdrasil_decision_forests",
+)
+
+bazel_dep(name = "com_github_grpc_grpc", version = "1.62.1")
+# grpc dependency
+local_path_override(
+    module_name = "com_github_grpc_grpc",
+    path = "grpc",
+)
+

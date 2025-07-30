@@ -1,0 +1,27 @@
+#build:cuda --crosstool_top=@local_config_cuda//crosstool:toolchain
+build:cuda --define=using_cuda=true
+build:cuda --define=using_cuda_nvcc=true
+build:cuda --action_env=CUDA_TOOLKIT_PATH=/usr/local/cuda
+build:cuda --action_env=PATH
+build:cuda --cuda-compiler-options=-std=c++17
+build --compiler=gcc
+
+build --cxxopt='-std=c++17'
+
+build --incompatible_enable_cc_toolchain_resolution
+
+build -c opt
+build --announce_rc
+build --noincompatible_strict_action_env
+
+# Enable after adding python headers to protobuf.
+build --define=use_fast_cpp_protos=true
+build --define=allow_oversize_protos=true
+build --define=grpc_no_ares=true
+
+# Nice print
+build:linux --copt=-fdiagnostics-color=always
+build --color=yes
+
+# Disable dependencies to Tensorflow.
+build --define=use_ydf_tensorflow_proto=1
